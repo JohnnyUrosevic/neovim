@@ -222,6 +222,15 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  {
+    'justinmk/vim-sneak', -- Multiline f and t
+    keys = {
+      { 'f', '<Plug>Sneak_f', desc = 'Multiline f' },
+      { 'F', '<Plug>Sneak_F', desc = 'Multiline F' },
+      { 't', '<Plug>Sneak_t', desc = 'Multiline t' },
+      { 'T', '<Plug>Sneak_T', desc = 'Multiline T' },
+    },
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
