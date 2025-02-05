@@ -39,3 +39,5 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.wrap = false
+
+vim.diagnostic.config { virtual_lines = true }
