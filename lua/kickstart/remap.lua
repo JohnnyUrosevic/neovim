@@ -16,10 +16,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set({ 'n', 'v' }, '<S-h>', 'gt', { desc = 'Go to next tab' })
 vim.keymap.set({ 'n', 'v' }, '<S-l>', 'gT', { desc = 'Go to previous tab' })
 
--- Macros
-vim.keymap.set('n', 'Q', '@q', { desc = 'Execute q macro' })
-vim.keymap.set('v', 'Q', ':norm @q<cr>', { desc = 'Execute q macro' })
-
 -- Add empty lines without leaving normal
 vim.keymap.set('n', '<cr>', 'o<ESC>', { desc = 'Insert empty line' })
 
