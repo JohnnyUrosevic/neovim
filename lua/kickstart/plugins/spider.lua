@@ -18,12 +18,12 @@ return {
     },
     {
       '<leader>w',
-      "<cmd>lua require('spider').motion('w')<CR>",
+      "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>",
       mode = { 'n', 'o', 'x' },
     },
     {
       '<leader>e',
-      "<cmd>lua require('spider').motion('e')<CR>",
+      "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>",
       mode = { 'n', 'o', 'x' },
     },
     -- Conflicts with breakpoints, maybe change later
