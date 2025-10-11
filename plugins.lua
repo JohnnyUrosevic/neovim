@@ -11,6 +11,7 @@ vim.pack.add {
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
+  { src = 'https://github.com/chrisgrieser/nvim-spider' },
 }
 
 require('mini.surround').setup()
@@ -37,6 +38,12 @@ vim.keymap.set({ 'n', 'o', 'x' }, 'F', '<Plug>Sneak_F', { desc = 'Multiline F' }
 vim.keymap.set({ 'n', 'o', 'x' }, 't', '<Plug>Sneak_t', { desc = 'Multiline t' })
 vim.keymap.set({ 'n', 'o', 'x' }, 'T', '<Plug>Sneak_T', { desc = 'Multiline T' })
 
+vim.keymap.set({ 'n', 'x' }, 'w', "<cmd>lua require('spider').motion('w', { subwordMovement = false })<CR>")
+vim.keymap.set({ 'n', 'x' }, 'e', "<cmd>lua require('spider').motion('e', { subwordMovement = false })<CR>")
+vim.keymap.set({ 'n', 'x' }, 'b', "<cmd>lua require('spider').motion('b', { subwordMovement = false })<CR>")
+vim.keymap.set({ 'n', 'o', 'x' }, '<leader>w', "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>")
+vim.keymap.set({ 'n', 'o', 'x' }, '<leader>e', "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>")
+
 require('todo-comments').setup {
   signs = false,
 }
@@ -45,4 +52,4 @@ require('nvim-autopairs').setup {
   check_ts = true,
 }
 
-vim.keymap.set({ 'n', 'o', 'x' }, 'f', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
+vim.keymap.set({ 'n', 'o', 'x' }, 'gr', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
