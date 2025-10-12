@@ -27,3 +27,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy to system clipbo
 vim.keymap.set({ 'n', 'v' }, '<leader>c', '"+c', { desc = 'Change to system clipboard' })
 
 vim.keymap.set('n', '<leader><leader>s', ':w<cr>', { desc = 'Save file' })
+
+vim.keymap.del('n', 'grt')
+vim.keymap.set('n', 'glt', vim.lsp.buf.type_definition, { desc = 'LSP Type Definition' })
+vim.keymap.del('n', 'gri')
+vim.keymap.set('n', 'gli', vim.lsp.buf.implementation, { desc = 'LSP Type Implementation' })
+vim.keymap.del({'n', 'x'}, 'gra')
+vim.keymap.set({'n', 'x'}, 'gla', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
+vim.keymap.del('n', 'grn')
+vim.keymap.set('n', 'glr', vim.lsp.buf.rename, { desc = 'LSP Rename' })

@@ -1,4 +1,5 @@
 vim.pack.add {
+  { src = 'https://github.com/cpea2506/one_monokai.nvim' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
@@ -12,7 +13,12 @@ vim.pack.add {
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
+  { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
+  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
 }
+
+vim.cmd.colorscheme 'one_monokai'
+vim.cmd.hi 'Comment gui=none'
 
 require('mini.surround').setup()
 
@@ -43,6 +49,17 @@ vim.keymap.set({ 'n', 'x' }, 'e', "<cmd>lua require('spider').motion('e', { subw
 vim.keymap.set({ 'n', 'x' }, 'b', "<cmd>lua require('spider').motion('b', { subwordMovement = false })<CR>")
 vim.keymap.set({ 'n', 'o', 'x' }, '<leader>w', "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>")
 vim.keymap.set({ 'n', 'o', 'x' }, '<leader>e', "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>")
+vim.keymap.set({ 'x', 'o' }, 'i<leader>w', '<cmd>lua require("various-textobjs").subword("inner")<cr>')
+vim.keymap.set({ 'x', 'o' }, 'a<leader>w', '<cmd>lua require("various-textobjs").subword("outer")<cr>')
+
+
+require('various-textobjs').setup {
+  useDefaults = true,
+  disabledDefaults = {
+    'iS',
+    'aS',
+  },
+}
 
 require('todo-comments').setup {
   signs = false,
@@ -52,4 +69,14 @@ require('nvim-autopairs').setup {
   check_ts = true,
 }
 
-vim.keymap.set({ 'n', 'o', 'x' }, 'gr', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
+vim.keymap.set({ 'n', 'x' }, 'gr', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
+
+require('gitsigns').setup {
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+}
