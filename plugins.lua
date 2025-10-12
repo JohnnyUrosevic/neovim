@@ -15,6 +15,7 @@ vim.pack.add {
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+  { src = 'https://github.com/folke/which-key.nvim' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
@@ -71,6 +72,11 @@ require('nvim-autopairs').setup {
 
 vim.keymap.set({ 'n', 'x' }, 'gr', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
 
+require('which-key').setup {
+  mappings = vim.g.have_nerd_font,
+  keys = {},
+}
+
 require('gitsigns').setup {
   signs = {
     add = { text = '+' },
@@ -79,11 +85,10 @@ require('gitsigns').setup {
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
   },
+  current_line_blame = true,
 }
 
 local gitsigns = require 'gitsigns'
-
-gitsigns.toggle_current_line_blame
 
 local function map(mode, l, r, opts)
   opts = opts or {}
