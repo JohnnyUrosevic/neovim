@@ -41,3 +41,9 @@ vim.opt.wrap = false
 vim.diagnostic.config { virtual_lines = true }
 
 vim.opt.timeout = false
+
+vim.opt.winborder = 'rounded'
+
+vim.lsp.enable({
+  'lua_ls',
+})
