@@ -75,11 +75,6 @@ require('nvim-autopairs').setup {
 
 vim.keymap.set({ 'n', 'x' }, 'gr', '<Plug>ReplaceWithRegisterOperator', { desc = 'Replace with register' })
 
-require('which-key').setup {
-  mappings = vim.g.have_nerd_font,
-  keys = {},
-}
-
 require('gitsigns').setup {
   signs = {
     add = { text = '+' },
