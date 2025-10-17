@@ -37,3 +37,5 @@ vim.keymap.set({ 'n', 'x' }, 'gla', vim.lsp.buf.code_action, { desc = 'LSP Code 
 vim.keymap.del('n', 'grn')
 vim.keymap.set('n', 'glr', vim.lsp.buf.rename, { desc = 'LSP Rename' })
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format Document' })
+
+vim.keymap.set({ "n", "v", "x" }, ";", ":")
