@@ -41,6 +41,7 @@ require('oil').setup {
 
 -- Open parent directory in current window
 vim.keymap.set('n', '\\', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '<C-\\>', ':vsplit<CR><CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 vim.keymap.set({ 'n', 'o', 'x' }, 'f', '<Plug>Sneak_f', { desc = 'Multiline f' })
 vim.keymap.set({ 'n', 'o', 'x' }, 'F', '<Plug>Sneak_F', { desc = 'Multiline F' })
