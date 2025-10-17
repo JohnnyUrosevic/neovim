@@ -15,7 +15,9 @@ vim.pack.add {
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/folke/which-key.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
@@ -48,11 +50,12 @@ vim.keymap.set({ 'n', 'o', 'x' }, 'T', '<Plug>Sneak_T', { desc = 'Multiline T' }
 vim.keymap.set({ 'n', 'x' }, 'w', "<cmd>lua require('spider').motion('w', { subwordMovement = false })<CR>")
 vim.keymap.set({ 'n', 'x' }, 'e', "<cmd>lua require('spider').motion('e', { subwordMovement = false })<CR>")
 vim.keymap.set({ 'n', 'x' }, 'b', "<cmd>lua require('spider').motion('b', { subwordMovement = false })<CR>")
-vim.keymap.set({ 'n', 'o', 'x' }, '<leader>w', "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>")
-vim.keymap.set({ 'n', 'o', 'x' }, '<leader>e', "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>")
+vim.keymap.set({ 'n', 'o', 'x' }, '<leader>w',
+  "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>")
+vim.keymap.set({ 'n', 'o', 'x' }, '<leader>e',
+  "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>")
 vim.keymap.set({ 'x', 'o' }, 'i<leader>w', '<cmd>lua require("various-textobjs").subword("inner")<cr>')
 vim.keymap.set({ 'x', 'o' }, 'a<leader>w', '<cmd>lua require("various-textobjs").subword("outer")<cr>')
-
 
 require('various-textobjs').setup {
   useDefaults = true,
@@ -92,7 +95,7 @@ local gitsigns = require 'gitsigns'
 
 local function map(mode, l, r, opts)
   opts = opts or {}
-  opts.buffer = bufnr
+  opts.buffer = vim.api.nvim_get_current_buf()
   vim.keymap.set(mode, l, r, opts)
 end
 
@@ -136,3 +139,57 @@ end, { desc = 'git [D]iff against last commit' })
 -- Toggles
 map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
 map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+
+
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = { ['<C-s>'] = 'select_vertical' },
+    },
+  },
+  -- pickers = {}
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
+}
+
+-- Enable Telescope extensions if they are installed
+pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'ui-select')
+
+-- See `:help telescope.builtin`
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch [B]uffers' })
+
+-- Slightly advanced example of overriding default behavior and theme
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+-- It's also possible to pass additional configuration options.
+--  See `:help telescope.builtin.live_grep()` for information about particular keys
+vim.keymap.set('n', '<leader>s/', function()
+  builtin.live_grep {
+    grep_open_files = true,
+    prompt_title = 'Live Grep in Open Files',
+  }
+end, { desc = '[S]earch [/] in Open Files' })
+
+-- Shortcut for searching your Neovim configuration files
+vim.keymap.set('n', '<leader>sn', function()
+  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+end, { desc = '[S]earch [N]eovim files' })
