@@ -1,4 +1,5 @@
 vim.pack.add {
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/cpea2506/one_monokai.nvim' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
@@ -10,7 +11,6 @@ vim.pack.add {
   { src = 'https://github.com/folke/todo-comments.nvim' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
@@ -18,6 +18,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+  { src = 'https://github.com/benomahony/oil-git.nvim' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
@@ -34,7 +35,7 @@ require('oil').setup {
     ['<C-l>'] = false,
     ['<C-k>'] = false,
     ['<C-j>'] = false,
-    ['<M-h>'] = 'actions.select_split',
+    ["<C-s>"] = { "actions.select", opts = { vertical = true } },
   },
   view_options = { show_hidden = true },
 }
@@ -55,6 +56,8 @@ vim.keymap.set({ 'n', 'o', 'x' }, '<leader>w',
   "<cmd>lua require('spider').motion('w', { skipInsignificantPunctuation = false })<CR>")
 vim.keymap.set({ 'n', 'o', 'x' }, '<leader>e',
   "<cmd>lua require('spider').motion('e', { skipInsignificantPunctuation = false })<CR>")
+vim.keymap.set({ 'n', 'o', 'x' }, '<leader>b',
+  "<cmd>lua require('spider').motion('b', { skipInsignificantPunctuation = false })<CR>")
 vim.keymap.set({ 'x', 'o' }, 'i<leader>w', '<cmd>lua require("various-textobjs").subword("inner")<cr>')
 vim.keymap.set({ 'x', 'o' }, 'a<leader>w', '<cmd>lua require("various-textobjs").subword("outer")<cr>')
 
