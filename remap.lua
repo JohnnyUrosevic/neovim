@@ -39,3 +39,8 @@ vim.keymap.set('n', 'glr', vim.lsp.buf.rename, { desc = 'LSP Rename' })
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format Document' })
 
 vim.keymap.set({ "n", "v", "x" }, ";", ":")
+vim.keymap.set({ "n", "v", "x" }, ":", ";")
+
+vim.keymap.set({ 'n', 'v' }, '<Tab>', ">>")
+vim.keymap.set({ 'n', 'v' }, '<S-Tab>', "<<")
+vim.keymap.set("i", '<S-Tab>', "<C-o><<")
