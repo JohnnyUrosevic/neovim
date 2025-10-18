@@ -9,6 +9,7 @@ vim.pack.add {
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/justinmk/vim-sneak' },
   { src = 'https://github.com/folke/todo-comments.nvim' },
+  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range("^1") },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
@@ -28,6 +29,8 @@ require('mini.surround').setup()
 
 require('mini.statusline').setup { use_icons = vim.g.have_nerd_font }
 
+require('blink.cmp').setup()
+
 require('oil').setup {
   columns = { 'icon' },
   keymaps = {
@@ -40,7 +43,6 @@ require('oil').setup {
   view_options = { show_hidden = true },
 }
 
--- Open parent directory in current window
 vim.keymap.set('n', '\\', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 vim.keymap.set('n', '<C-\\>', ':vsplit<CR><CMD>Oil<CR>', { desc = 'Open parent directory' })
 
@@ -122,15 +124,12 @@ map('n', '[c', function()
   end
 end, { desc = 'Jump to previous git [c]hange' })
 
--- Actions
--- visual mode
 map('v', '<leader>hs', function()
   gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
 end, { desc = 'git [s]tage hunk' })
 map('v', '<leader>hr', function()
   gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
 end, { desc = 'git [r]eset hunk' })
--- normal mode
 map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
 map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
 map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
@@ -142,7 +141,6 @@ map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
 map('n', '<leader>hD', function()
   gitsigns.diffthis '@'
 end, { desc = 'git [D]iff against last commit' })
--- Toggles
 map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
 map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
 
@@ -153,7 +151,6 @@ require('telescope').setup {
       i = { ['<C-s>'] = 'select_vertical' },
     },
   },
-  -- pickers = {}
   extensions = {
     ['ui-select'] = {
       require('telescope.themes').get_dropdown(),
@@ -161,11 +158,9 @@ require('telescope').setup {
   },
 }
 
--- Enable Telescope extensions if they are installed
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'ui-select')
 
--- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -177,17 +172,13 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch [B]uffers' })
 
--- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to Telescope to change the theme, layout, etc.
   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
--- It's also possible to pass additional configuration options.
---  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set('n', '<leader>s/', function()
   builtin.live_grep {
     grep_open_files = true,
@@ -195,7 +186,7 @@ vim.keymap.set('n', '<leader>s/', function()
   }
 end, { desc = '[S]earch [/] in Open Files' })
 
--- Shortcut for searching your Neovim configuration files
 vim.keymap.set('n', '<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
+
