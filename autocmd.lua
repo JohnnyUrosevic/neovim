@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-local highlight_augroup = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true })
+local highlight_augroup = vim.api.nvim_create_augroup('highlight-cursor', { clear = true })
 
 vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
   group = highlight_augroup,
