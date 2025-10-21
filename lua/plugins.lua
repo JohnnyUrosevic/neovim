@@ -9,7 +9,7 @@ vim.pack.add {
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/justinmk/vim-sneak' },
   { src = 'https://github.com/folke/todo-comments.nvim' },
-  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range("^1") },
+  { src = 'https://github.com/saghen/blink.cmp',                         version = vim.version.range("^1") },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
@@ -21,6 +21,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/benomahony/oil-git.nvim' },
   { src = 'https://github.com/lambdalisue/vim-suda' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
@@ -77,10 +78,10 @@ require('todo-comments').setup {
 }
 
 require('nvim-treesitter.configs').setup {
-    auto_install = true,
-    highlight = {
-      enable = true,
-    },
+  auto_install = true,
+  highlight = {
+    enable = true,
+  },
 }
 
 require('nvim-autopairs').setup {
@@ -190,4 +191,3 @@ end, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
-
