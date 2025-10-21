@@ -20,6 +20,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/benomahony/oil-git.nvim' },
+  { src = 'https://github.com/lambdalisue/vim-suda' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
