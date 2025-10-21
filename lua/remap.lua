@@ -28,15 +28,18 @@ vim.keymap.set({ 'n', 'v' }, '<leader>c', '"+c', { desc = 'Change to system clip
 
 vim.keymap.set('n', '<leader><leader>s', ':w<cr>', { desc = 'Save file' })
 
-vim.keymap.del('n', 'grt')
 vim.keymap.set('n', 'glt', vim.lsp.buf.type_definition, { desc = 'LSP Type Definition' })
-vim.keymap.del('n', 'gri')
 vim.keymap.set('n', 'gli', vim.lsp.buf.implementation, { desc = 'LSP Type Implementation' })
-vim.keymap.del({ 'n', 'x' }, 'gra')
 vim.keymap.set({ 'n', 'x' }, 'gla', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
-vim.keymap.del('n', 'grn')
 vim.keymap.set('n', 'glr', vim.lsp.buf.rename, { desc = 'LSP Rename' })
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format Document' })
+
+pcall(function()
+  vim.keymap.del('n', 'grt')
+  vim.keymap.del('n', 'gri')
+  vim.keymap.del({ 'n', 'x' }, 'gra')
+  vim.keymap.del('n', 'grn')
+end)
 
 vim.keymap.set({ "n", "v", "x" }, ";", ":")
 vim.keymap.set({ "n", "v", "x" }, ":", ";")
@@ -44,3 +47,6 @@ vim.keymap.set({ "n", "v", "x" }, ":", ";")
 vim.keymap.set({ 'n', 'v' }, '<Tab>', ">>")
 vim.keymap.set({ 'n', 'v' }, '<S-Tab>', "<<")
 vim.keymap.set("i", '<S-Tab>', "<C-o><<")
+
+vim.keymap.set({ 'n', 'v' }, '<C-d>', "<C-d>zz")
+vim.keymap.set({ 'n', 'v' }, '<C-u>', "<C-u>zz")
