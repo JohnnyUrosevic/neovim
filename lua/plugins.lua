@@ -7,7 +7,7 @@ vim.pack.add {
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/echasnovski/mini.nvim' },
   { src = 'https://github.com/tpope/vim-sleuth' },
-  { src = 'https://github.com/justinmk/vim-sneak' },
+  { src = 'https://github.com/rhysd/clever-f.vim' },
   { src = 'https://github.com/folke/todo-comments.nvim' },
   { src = 'https://github.com/saghen/blink.cmp',                         version = vim.version.range("^1") },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
@@ -47,11 +47,6 @@ require('oil').setup {
 
 vim.keymap.set('n', '\\', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 vim.keymap.set('n', '<C-\\>', ':vsplit<CR><CMD>Oil<CR>', { desc = 'Open parent directory' })
-
-vim.keymap.set({ 'n', 'o', 'x' }, 'f', '<Plug>Sneak_f', { desc = 'Multiline f' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'F', '<Plug>Sneak_F', { desc = 'Multiline F' })
-vim.keymap.set({ 'n', 'o', 'x' }, 't', '<Plug>Sneak_t', { desc = 'Multiline t' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'T', '<Plug>Sneak_T', { desc = 'Multiline T' })
 
 vim.keymap.set({ 'n', 'x' }, 'w', "<cmd>lua require('spider').motion('w', { subwordMovement = false })<CR>")
 vim.keymap.set({ 'n', 'x' }, 'e', "<cmd>lua require('spider').motion('e', { subwordMovement = false })<CR>")
@@ -191,3 +186,5 @@ end, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
+
+vim.g.clever_f_mark_char_color = 'Search'
