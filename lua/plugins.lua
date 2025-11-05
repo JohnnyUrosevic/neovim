@@ -22,6 +22,7 @@ vim.pack.add {
   { src = 'https://github.com/benomahony/oil-git.nvim' },
   { src = 'https://github.com/lambdalisue/vim-suda' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
+  { src = 'https://github.com/norcalli/nvim-colorizer.lua' },
 }
 
 vim.cmd.colorscheme 'one_monokai'
@@ -188,3 +189,9 @@ vim.keymap.set('n', '<leader>sn', function()
 end, { desc = '[S]earch [N]eovim files' })
 
 vim.g.clever_f_mark_char_color = 'Search'
+
+require('colorizer').setup {
+  '*';
+  css = { rgb_fn = true; };
+}
+
