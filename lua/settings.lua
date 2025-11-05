@@ -45,5 +45,5 @@ vim.opt.timeout = false
 vim.opt.winborder = 'rounded'
 
 vim.lsp.enable({
-  'lua_ls',
+  'lua_ls', 'cssls', 'ts_ls',
 })
