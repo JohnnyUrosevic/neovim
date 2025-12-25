@@ -73,7 +73,7 @@ require('todo-comments').setup {
   signs = false,
 }
 
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.config').setup {
   auto_install = true,
   highlight = {
     enable = true,
