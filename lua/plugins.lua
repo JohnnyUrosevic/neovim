@@ -1,5 +1,5 @@
 vim.pack.add {
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',         version = 'main' },
   { src = 'https://github.com/cpea2506/one_monokai.nvim' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
@@ -9,7 +9,7 @@ vim.pack.add {
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/rhysd/clever-f.vim' },
   { src = 'https://github.com/folke/todo-comments.nvim' },
-  { src = 'https://github.com/saghen/blink.cmp',                         version = vim.version.range("^1") },
+  { src = 'https://github.com/saghen/blink.cmp',                        version = vim.version.range("^1") },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
@@ -73,7 +73,7 @@ require('todo-comments').setup {
   signs = false,
 }
 
-require('nvim-treesitter.config').setup {
+require('nvim-treesitter').setup {
   auto_install = true,
   highlight = {
     enable = true,
@@ -191,7 +191,6 @@ end, { desc = '[S]earch [N]eovim files' })
 vim.g.clever_f_mark_char_color = 'Search'
 
 require('colorizer').setup {
-  '*';
-  css = { rgb_fn = true; };
+  '*',
+  css = { rgb_fn = true, },
 }
-
