@@ -57,5 +57,21 @@ vim.opt.timeout = false
 vim.opt.winborder = 'rounded'
 
 vim.lsp.enable({
-  'lua_ls', 'cssls', 'ts_ls', 'nil_ls',
+  'lua_ls', 'cssls', 'ts_ls', 'nixd',
 })
+
+local hostname = vim.fn.trim(vim.fn.system("hostname"))
+vim.lsp.config['nixd'] = {
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import (builtins.getFlake(toString /home/goose/nix)).inputs.nixpkgs { }",
+      },
+      options = {
+        nixos = {
+          expr = "let flake = builtins.getFlake(toString /home/goose/nix); in flake.nixosConfigurations." .. hostname .. ".options",
+        },
+      },
+    },
+  },
+}
