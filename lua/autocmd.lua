@@ -19,6 +19,11 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
 })
 
 -- Enable treesitter on file open and install any missing parsers
+local function enable_treesitter(buf, language)
+    vim.treesitter.start(buf, language)
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('treesitter.setup', {}),
   callback = function(args)
@@ -29,12 +34,13 @@ vim.api.nvim_create_autocmd('FileType', {
       local treesitter = require('nvim-treesitter')
       if vim.list_contains(treesitter.get_available(), language) then
           if not vim.list_contains(treesitter.get_installed(), language) then
-              treesitter.install(language):wait()
+              treesitter.install(language):await(function()
+                enable_treesitter(buf, language)
+              end)
+          else
+            enable_treesitter(buf, language)
           end
 
-          vim.treesitter.start(buf, language)
-
-          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
   end,
 })
