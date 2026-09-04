@@ -71,6 +71,9 @@ vim.lsp.config['nixd'] = {
         nixos = {
           expr = "let flake = builtins.getFlake(toString /home/goose/nix); in flake.nixosConfigurations." .. hostname .. ".options",
         },
+        formatting = {
+          command = { "nixpkgs-fmt" },
+        },
       },
     },
   },
